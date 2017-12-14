@@ -1,0 +1,10 @@
+<b>Scans:</b>
+<div *ngFor="let scan of scans | async" class="card">
+    <scan-detail [scan]='scan'></scan-detail>
+</div>
+
+<!-- <mat-spinner *ngIf="showSpinner"></mat-spinner> -->
+
+<!-- <button type="button" class="button is-danger" (click)='deleteScans()'>Delete All Scans</button> -->
+
+<!-- <scan-form></scan-form> -->

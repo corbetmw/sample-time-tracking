@@ -1,0 +1,47 @@
+<mat-card >
+  <mat-card-title>{{ sample.$key || 'missing title' }}</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+        <mat-list-item >
+            <b mat-line>Production Number:</b>
+            <p > {{ sample.productionNumber }} </p>
+        </mat-list-item >
+        <mat-list-item >
+            <b mat-line>Lot Number:</b>
+            <p > {{ sample.lotNumber }} </p>
+        </mat-list-item >
+        <mat-list-item >
+            <b mat-line>Color:</b>
+            <p >  {{ sample.color }} </p>
+        </mat-list-item >
+        <mat-list-item >
+            <b mat-line>Equipment:</b>
+            <p > {{ sample.equipment }} </p>
+        </mat-list-item >
+        <mat-list-item >
+            <b mat-line>HMIS Number:</b>
+            <p > {{ sample.hmisNumber }} </p>
+        </mat-list-item >
+        <mat-list-item >
+            <b mat-line>Printed By:</b>
+            <p > {{ sample.userName }} </p>
+        </mat-list-item >
+        <mat-list-item >
+            <b mat-line>Additional Info:</b>
+            <p > {{ sample.addInfo }} </p>
+        </mat-list-item >
+        <mat-list-item >
+            <b mat-line>Date Printed:</b>
+            <p > {{ sample.datePrinted | date: 'medium' }} </p>
+        </mat-list-item >
+
+    </mat-list>
+  </mat-card-content>
+
+</mat-card>
+
+<!-- <div class="card-footer"> -->
+<!--   <span class="button is-small is-info card-footer-sample" (click)='updateDatePrinted()'>Update Date Printed</span> -->
+<!--   <span class="button is-small is-success card-footer-sample" (click)='updateInTime()'>Update In Time</span> -->
+<!--   <span class="button is-small is-danger card-footer-sample" (click)='deleteSample()'>Delete</span> -->
+<!-- </div> -->

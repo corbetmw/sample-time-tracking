@@ -6,13 +6,14 @@ import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.c
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule  
   ],
   declarations: [
     LoadingSpinnerComponent,
   ],
   exports: [
     LoadingSpinnerComponent,
+
   ]
 })
 export class SharedModule { }

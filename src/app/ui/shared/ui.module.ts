@@ -16,8 +16,6 @@ import { FooterNavComponent } from '../footer-nav/footer-nav.component';
 import { ReadmePageComponent } from '../readme-page/readme-page.component';
 import { NotificationMessageComponent } from '../notification-message/notification-message.component';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
