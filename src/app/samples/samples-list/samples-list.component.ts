@@ -56,29 +56,3 @@ export class SamplesListComponent implements OnInit {
   }
 }
 
-export interface OpenSample {
-  sampleId: string;
-  lotNumber: string;
-  productionNumber: string;
-  equipment: string;
-  inTime: number;
-}
-
-
-// export class OpenSampleDatasource extends MatTableDataSource<any> {
-
-
-//   constructor(private sampleSvc: SampleService,
-//               private matSort: MatSort,
-//               private paginator: MatPaginator) {
-//     super();
-//   }
-//   /** Connect function called by the table to retrieve one stream containing the data to render. */
-//   connect(): Observable<any[]> {
-//     return this.sampleSvc.getOpenSamples();
-//   }
-
-//   disconnect() { }
-
-// }
-

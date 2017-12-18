@@ -9,17 +9,14 @@ import { SampleService } from './sample.service';
 import { SamplesListComponent } from '../samples-list/samples-list.component';
 import { SampleFormComponent } from '../sample-form/sample-form.component';
 import { SampleDetailComponent } from '../sample-detail/sample-detail.component';
-import { SamplesOpenTableComponent } from '../samples-open-table/samples-open-table.component';
+// import { SamplesOpenTableComponent } from '../samples-open-table/samples-open-table.component';
 //scan component
 import { ScansListComponent } from '../../scans/scans-list/scans-list.component';
 import { ScanDetailComponent } from '../../scans/scan-detail/scan-detail.component';
 //Material Module
 import { MaterialModule } from '../../material/material.module';
 //yo
-import { BarcodeListenerComponent } from '../../ui/barcode-listener/barcode-listener.component';
-
-//ngx datatable 
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+// import { BarcodeListenerComponent } from '../../ui/barcode-listener/barcode-listener.component';
 
 @NgModule({
   imports: [
@@ -28,15 +25,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ReactiveFormsModule,
     FormsModule,
     AngularFireDatabaseModule,
-    MaterialModule,
-    NgxDatatableModule
+    MaterialModule
   ],
   declarations: [
     SamplesListComponent,
     SampleFormComponent,
     SampleDetailComponent,
-    SamplesOpenTableComponent,    
-    BarcodeListenerComponent
+    // SamplesOpenTableComponent,    
+    // BarcodeListenerComponent
   ],
   providers: [
     SampleService

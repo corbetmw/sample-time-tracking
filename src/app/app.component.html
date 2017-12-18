@@ -1,22 +1,32 @@
 <div style="position:absolute;top:0;left:0;right:0;bottom:0;">
-    <mat-sidenav-container #sidenav style="height:100%;width:100%;">
-      <mat-sidenav mode="push" #sidenav style="min-width:220px;">
-          <mat-nav-list>
-              <a mat-list-item routerLink="/samples">Samples</a>          
-          </mat-nav-list>
-      </mat-sidenav>
-      <mat-toolbar color="primary" style="min-height:64px;">
-        <span>
-            <button style="background-color:transparent;border-style:none;cursor:pointer;" (click)="sidenav.open()">
-                <i class="material-icons toolbar-link-icon" style="color:white;">menu</i>
-            </button>
-        </span>
-      <span>Sample Time Tracking</span>
-      </mat-toolbar>
-      <div class="inner-sidenav-content">
+  
+  <mat-toolbar color="primary" style="min-height:64px;">
+    <span>
+      <button style="background-color:transparent;border-style:none;cursor:pointer;" (click)="sidenav.toggle()">
+        <i class="material-icons toolbar-link-icon" style="color:white;">menu</i>
+      </button>
+    </span>
+    <span>Sample Time Tracking</span>
+  </mat-toolbar>
+
+  <mat-sidenav-container #sidenav style="height:100%;width:100%;">
+
+    
+    <mat-sidenav mode="side" #sidenav style="min-width:220px;">
+      <mat-nav-list>
+        <b mat-list-item >Pages</b>          
+        <a mat-list-item routerLink="/samples">Samples</a>
+        <a mat-list-item routerLink="/kiosk">Launch Kiosk</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
         <div style="padding-top:2em;padding-bottom:2em;">
           <router-outlet></router-outlet>
         </div>
-      </div>
-    </mat-sidenav-container>
-  </div>
+    </mat-sidenav-content>
+
+
+  </mat-sidenav-container>
+
+</div>

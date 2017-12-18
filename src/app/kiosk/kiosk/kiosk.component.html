@@ -1,0 +1,21 @@
+<mat-card>
+    <form>
+        <mat-form-field>
+            <input matInput placeholder="Sample Id">
+        </mat-form-field>
+    </form>
+    <mat-card-actions>
+        <button mat-raised-button color="accent">
+            <mat-icon>timer</mat-icon>
+            Punch Sample
+        </button>
+        <button mat-raised-button color="primary" (click)='simulateScan()'>
+            <mat-icon>input</mat-icon>
+            Simulate Scan
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+<samples-open-table></samples-open-table>
+
+<barcode-listener (scan)='checkSampleFromList($event)'></barcode-listener>

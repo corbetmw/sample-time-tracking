@@ -16,6 +16,7 @@ import { FooterNavComponent } from '../footer-nav/footer-nav.component';
 import { ReadmePageComponent } from '../readme-page/readme-page.component';
 import { NotificationMessageComponent } from '../notification-message/notification-message.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -32,13 +33,14 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     FooterNavComponent,
     UserFormComponent,
     ReadmePageComponent,
-    NotificationMessageComponent,
+    NotificationMessageComponent
   ],
   exports: [
     TopNavComponent,
     FooterNavComponent,
     UserProfileComponent,
     NotificationMessageComponent,
+
   ]
 })
 export class UiModule { }
