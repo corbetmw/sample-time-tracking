@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { ScanService } from '../../scans/shared/scan.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'kiosk',
@@ -8,47 +9,54 @@ import { ScanService } from '../../scans/shared/scan.service';
   encapsulation: ViewEncapsulation.None
 })
 export class KioskComponent implements OnInit {
+  @ViewChild('punchButton', { read: ElementRef }) punchButton: ElementRef;
 
-  constructor(private scanSvc: ScanService) { }
+  sampleId: string = '';
+
+  constructor(private scanSvc: ScanService) { 
+    
+  }
 
   ngOnInit() {
   }
 
-  simulateKeyPress(key, code) {
+  populateInput(sampleId) {
+    this.sampleId = sampleId;
+    let clickButtonEvent = new MouseEvent('click', { bubbles: true });
+    this.punchButton.nativeElement.dispatchEvent(clickButtonEvent);
 
-    let event = new KeyboardEvent('keypress', {
-        code: code,
-        key: key,
-    });
-
-    document.dispatchEvent(event);
+    setTimeout(() => {
+      this.sampleId = ''
+    },2000);
 
   }
 
-  simulateScan() {  
-    let sampleId = '31475'
-    length = sampleId.length
+  simulateKeyPress(key, code) {
+    let event = new KeyboardEvent('keypress', {
+      code: code,
+      key: key,
+    });
+    document.dispatchEvent(event);
+  }
 
-    for (let i=0; i < length + 1; i++) {
-      if(i != length){
-        let currentKey = sampleId.charAt(i);
-        let currentKeyCode = sampleId.charCodeAt(i);
-        this.simulateKeyPress(currentKey,currentKeyCode);
-      }else{
+  simulateScan() {
+    let simSampleId = '31475'
+    length = simSampleId.length
+
+    for (let i = 0; i < length + 1; i++) {
+      if (i != length) {
+        let currentKey = simSampleId.charAt(i);
+        let currentKeyCode = simSampleId.charCodeAt(i);
+        this.simulateKeyPress(currentKey, currentKeyCode);
+      } else {
         this.simulateKeyPress('enter', 13);
       }
     }
 
-    for (let i = 0, len = sampleId.length +1; i < len; i++) {
-
-
-    }
   }
 
   checkSampleFromList(event) {
     this.scanSvc.checkScan(event);
-    // console.log(event);
-    // console.log('scan checked');
   }
 
 }

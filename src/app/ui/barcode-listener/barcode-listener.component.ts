@@ -39,8 +39,6 @@ export class BarcodeListenerComponent implements OnInit {
     }
 
     this.currentTime = timestamp;
-    console.log(this.previousTimeDiff)
-    console.log(this.currentTimeDiff)
 
     //if either the current time diff is less than 15, or the current time diff is less than 15
     //and the previous time diff was greater than 15. This is in the case where there is certainly a longer

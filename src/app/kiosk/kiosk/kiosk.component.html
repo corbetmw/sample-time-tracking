@@ -1,11 +1,11 @@
 <mat-card>
     <form>
         <mat-form-field>
-            <input matInput placeholder="Sample Id">
+            <input matInput placeholder="Sample Id" [(ngModel)]="sampleId" name="sampleId">
         </mat-form-field>
     </form>
     <mat-card-actions>
-        <button mat-raised-button color="accent">
+        <button #punchButton mat-raised-button color="accent" (click)='checkSampleFromList(sampleId)'>
             <mat-icon>timer</mat-icon>
             Punch Sample
         </button>
@@ -18,4 +18,4 @@
 
 <samples-open-table></samples-open-table>
 
-<barcode-listener (scan)='checkSampleFromList($event)'></barcode-listener>
+<barcode-listener (scan)='populateInput($event)'></barcode-listener>

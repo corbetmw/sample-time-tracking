@@ -39,6 +39,7 @@ export class SamplesOpenTableComponent implements OnInit {
       this.dataSource.data = openSamples;
       this.showSpinner = false;
     })
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
