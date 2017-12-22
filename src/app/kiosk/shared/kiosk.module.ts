@@ -13,9 +13,10 @@ import { MaterialModule } from '../../material/material.module';
 //yo
 import { BarcodeListenerComponent } from '../../ui/barcode-listener/barcode-listener.component';
 import { SamplesOpenTableComponent } from '../../samples/samples-open-table/samples-open-table.component';
+import { ScanResponseDialogComponent } from '../scan-response-dialog/scan-response-dialog.component';
 
 //Scan service for checking samples
-import { ScanService } from '../../scans/shared/scan.service';
+import { SampleScanService } from 'app/shared/sample-scan.service';
 
 @NgModule({
   imports: [
@@ -28,10 +29,12 @@ import { ScanService } from '../../scans/shared/scan.service';
   declarations: [
     SamplesOpenTableComponent,    
     BarcodeListenerComponent,
-    KioskComponent
+    KioskComponent,
+    ScanResponseDialogComponent
   ],
   providers: [
-    ScanService
-  ]
+    SampleScanService
+  ],
+  entryComponents: [ScanResponseDialogComponent]
 })
 export class KioskModule { }

@@ -1,0 +1,11 @@
+  
+  <h1 mat-dialog-title>{{data.scanState}}</h1>
+<mat-dialog-content>
+    <i *ngIf="!data.success" class="material-icons" id="fail" >error</i> 
+    <i *ngIf="data.success" class="material-icons" id="success">check_circle</i> 
+    
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" color="primary" tabindex="-1">Close</button>
+</mat-dialog-actions>

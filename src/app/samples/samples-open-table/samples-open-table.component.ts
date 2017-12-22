@@ -8,12 +8,16 @@ import { Scan } from '../../scans/shared/scan';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { async } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { trigger,state,style,transition,animate,keyframes } from '@angular/animations';
+import { SampleScanService } from 'app/shared/sample-scan.service';
 
 @Component({
   selector: 'samples-open-table',
   templateUrl: './samples-open-table.component.html',
   styleUrls: ['./samples-open-table.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class SamplesOpenTableComponent implements OnInit {
   showSpinner: boolean = true;
@@ -22,6 +26,7 @@ export class SamplesOpenTableComponent implements OnInit {
     'sampleId',
     'lotNumber',
     'productionNumber',
+    'color',
     'equipment',
     'userName',
     'addInfo',
@@ -32,10 +37,10 @@ export class SamplesOpenTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private sampleSvc: SampleService, private scanSvc: ScanService) { }
+  constructor(private sampleScanSvc: SampleScanService) { }
 
   ngAfterViewInit() {
-    this.sampleSvc.getOpenSamples().subscribe(openSamples => {
+    this.sampleScanSvc.getOpenSamples().subscribe(openSamples => {
       this.dataSource.data = openSamples;
       this.showSpinner = false;
     })
@@ -55,7 +60,7 @@ export class SamplesOpenTableComponent implements OnInit {
   }
 
   checkSampleFromList(event) {
-    this.scanSvc.checkScan(event);
+    this.sampleScanSvc.checkScan(event);
     // console.log(event);
     // console.log('scan checked');
   }

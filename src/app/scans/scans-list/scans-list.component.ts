@@ -25,9 +25,5 @@ export class ScansListComponent implements OnInit {
     })
   }
 
-  checkScanFromList(event) {
-    console.log("this is what's being sent to the checkScan service " + event);
-    this.scanSvc.checkScan(event);
-  }
 
 }

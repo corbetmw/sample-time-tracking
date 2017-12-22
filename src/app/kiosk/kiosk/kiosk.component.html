@@ -1,19 +1,29 @@
 <mat-card>
-    <form>
-        <mat-form-field>
-            <input matInput placeholder="Sample Id" [(ngModel)]="sampleId" name="sampleId">
-        </mat-form-field>
-    </form>
+
+    <mat-card-title>
+        Time Clock
+    </mat-card-title>
+
+    <mat-card-content>
+        <form>
+            <mat-form-field>
+                <input matInput placeholder="Sample Id" [(ngModel)]="sampleId" name="sampleId" [formControl]="sampleIdInput" autocomplete="off" required>
+                <mat-error *ngIf="sampleIdInput.invalid">{{getErrorMessage()}}</mat-error>                
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+
     <mat-card-actions>
-        <button #punchButton mat-raised-button color="accent" (click)='checkSampleFromList(sampleId)'>
+        <button #punchButton mat-raised-button color="accent" type="submit" (click)='checkSampleFromList(sampleId)'>
             <mat-icon>timer</mat-icon>
             Punch Sample
         </button>
-        <button mat-raised-button color="primary" (click)='simulateScan()'>
+        <button *ngIf="!isProduction" mat-raised-button color="primary" (click)='simulateScan()'>
             <mat-icon>input</mat-icon>
             Simulate Scan
         </button>
     </mat-card-actions>
+
 </mat-card>
 
 <samples-open-table></samples-open-table>

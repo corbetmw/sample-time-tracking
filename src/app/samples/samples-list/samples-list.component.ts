@@ -49,10 +49,5 @@ export class SamplesListComponent implements OnInit {
     // return openSamplesArray;
   }
 
-  checkSampleFromList(event) {
-    this.scanSvc.checkScan(event);
-    // console.log(event);
-    // console.log('scan checked');
-  }
 }
 

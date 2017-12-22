@@ -17,6 +17,10 @@
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Production Number </mat-header-cell>
 			<mat-cell *matCellDef="let sample"> {{ sample.productionNumber }} </mat-cell>
 		</ng-container>
+		<ng-container matColumnDef="color">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Product </mat-header-cell>
+			<mat-cell *matCellDef="let sample"> {{ sample.color }} </mat-cell>
+		</ng-container>
 		<ng-container matColumnDef="equipment">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Equipment </mat-header-cell>
 			<mat-cell *matCellDef="let sample"> {{ sample.equipment }} </mat-cell>
@@ -28,13 +32,14 @@
 		<ng-container matColumnDef="addInfo">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Notes </mat-header-cell>
 			<mat-cell *matCellDef="let sample"> {{ sample.addInfo }} </mat-cell>
-		</ng-container>		
+		</ng-container>
 		<ng-container matColumnDef="inTime">
-			<mat-header-cell *matHeaderCellDef mat-sort-header > In Time </mat-header-cell>
+			<mat-header-cell *matHeaderCellDef mat-sort-header> In Time </mat-header-cell>
 			<mat-cell *matCellDef="let sample"> {{ sample.inTime | date: 'medium' }} </mat-cell>
 		</ng-container>
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 	</mat-table>
-	<mat-spinner *ngIf="showSpinner"></mat-spinner>	
+
+	<mat-spinner *ngIf="showSpinner"></mat-spinner>
 </div>

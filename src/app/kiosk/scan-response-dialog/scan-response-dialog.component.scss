@@ -1,0 +1,28 @@
+.mat-dialog-title{
+    text-align: center;
+}
+
+#fail{
+    color:#ff1744;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 200px;
+    margin: auto;
+    width: 100%;
+    height: 230px;
+}
+
+#success{
+    color: #00c853;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 200px;
+    margin: auto;
+    width: 100%;
+    height: 230px;
+}
+

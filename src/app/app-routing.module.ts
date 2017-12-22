@@ -13,8 +13,8 @@ import { CoreModule } from './core/core.module'
 const routes: Routes = [
   { path: '', component: ReadmePageComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'samples', component: SamplesListComponent},  
-  { path: 'kiosk', component: KioskComponent}
+  { path: 'samples', component: SamplesListComponent, canActivate: [AuthGuard]},  
+  { path: 'kiosk', component: KioskComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

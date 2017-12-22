@@ -4,6 +4,7 @@ import { Scan } from './scan';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
 import * as firebase from 'firebase';
+import { SampleService } from 'app/samples/shared/sample.service';
 
 
 @Injectable()
@@ -59,26 +60,6 @@ export class ScanService {
       this.scansRef.remove(key)
     } catch (error) {
       this.handleError(error);
-    }
-  }
-
-  // Get scan id and see if it's clocked in or not
-  checkScan(sampleId: string) {
-    try {
-      let lastestScan = this.getLatestScanForSample(sampleId);
-      lastestScan.subscribe(scans => {
-        let currentScan = scans[0];
-        //console.log(currentScan);
-        if (currentScan === undefined) {
-          this.punchScanIn(sampleId);
-        } else if (currentScan.outTime) {
-          this.punchScanIn(sampleId);
-        } else {
-          this.punchScanOut(currentScan.$key);
-        }
-      });
-    } catch (error) { 
-      this.handleError(error);      
     }
   }
 

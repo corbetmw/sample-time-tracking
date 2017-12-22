@@ -10,7 +10,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
-  newUser = true; // to toggle login or signup form
+  newUser = false; // to toggle login or signup form
   passReset = false; // set to true when password reset is triggered
   formErrors = {
     'email': '',
@@ -35,9 +35,9 @@ export class UserFormComponent implements OnInit {
     this.buildForm();
   }
 
-  toggleForm() {
-    this.newUser = !this.newUser;
-  }
+  // toggleForm() {
+  //   this.newUser = !this.newUser;
+  // }
 
   signup(): void {
     this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'])
@@ -46,6 +46,7 @@ export class UserFormComponent implements OnInit {
   login(): void {
     this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
   }
+
 
   resetPassword() {
     this.auth.resetPassword(this.userForm.value['email'])
@@ -91,4 +92,5 @@ export class UserFormComponent implements OnInit {
       }
     }
   }
+
 }

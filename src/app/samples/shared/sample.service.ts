@@ -13,16 +13,16 @@ export class SampleService {
   private basePath = '/samples';
 
   samplesRef: AngularFireList<Sample>;
-  sampleRef:  AngularFireObject<Sample>;
+  sampleRef: AngularFireObject<Sample>;
 
   samples: Observable<Sample[]>; //  list of objects
-  sample:  Observable<Sample>;   //   single object
+  sample: Observable<Sample>;   //   single object
 
   scansRef: AngularFireList<Scan>;
-  scanRef:  AngularFireObject<Scan>;
+  scanRef: AngularFireObject<Scan>;
 
   scans: Observable<Scan[]>;
-  scan:  Observable<Scan>; 
+  scan: Observable<Scan>;
 
   constructor(private db: AngularFireDatabase, private scanSvc: ScanService) {
     this.samplesRef = db.list('/samples')
@@ -30,20 +30,22 @@ export class SampleService {
 
   // Return an observable list with optional query
   // You will usually call this from OnInit in a component
-  
+
   getSamplesList(query?) {
     // const samplesRef = afDb.list('/samples')
     // return this.samplesRef.valueChanges()
     return this.samplesRef.snapshotChanges().map(arr => {
-      return arr.map(snap => Object.assign(snap.payload.val(), { $key: snap.key }) )
+      return arr.map(snap => Object.assign(snap.payload.val(), { $key: snap.key }))
     })
   }
 
   // Return a single observable sample
   getSample(key: string): Observable<Sample> {
+
     const samplePath = `${this.basePath}/${key}`;
     this.sample = this.db.object(samplePath).valueChanges();
     return this.sample
+
   }
 
   // Create a bramd new sample
@@ -66,25 +68,6 @@ export class SampleService {
     this.samplesRef.remove()
   }
 
-  getOpenSamples() {
-    let openScans = this.scanSvc.getOpenScans();
-
-    let fullSamples = openScans.map(scans => {
-      for (let scan of scans) {
-        this.getSample(scan.sampleId).subscribe(sample => {
-          scan.lotNumber = sample.lotNumber;
-          scan.productionNumber = sample.productionNumber;
-          scan.equipment = sample.equipment;
-          scan.userName = sample.userName;
-          scan.addInfo = sample.addInfo
-        })
-      }
-      return scans;
-    });
-    
-    //fullSamples.subscribe(samples => console.log(samples));
-    return fullSamples;
-  }
 
   // Default error handling for all actions
   private handleError(error) {
@@ -100,7 +83,7 @@ export class SampleService {
   //     }
   //     return scans;
   //   });
-    
+
   //   //fullSamples.subscribe(samples => console.log(samples));
   //   return fullSamples;
   // }

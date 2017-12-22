@@ -40,25 +40,6 @@ export class AuthService {
   ////// OAuth Methods /////
 
 
-  googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    return this.oAuthLogin(provider);
-  }
-
-  githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider()
-    return this.oAuthLogin(provider);
-  }
-
-  facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider()
-    return this.oAuthLogin(provider);
-  }
-
-  twitterLogin() {
-    const provider = new firebase.auth.TwitterAuthProvider()
-    return this.oAuthLogin(provider);
-  }
 
 
   private oAuthLogin(provider) {
@@ -70,17 +51,6 @@ export class AuthService {
       .catch(error => this.handleError(error) );
   }
 
-
-  //// Anonymous Auth ////
-
-  anonymousLogin() {
-    return this.afAuth.auth.signInAnonymously()
-      .then((user) => {
-        this.notify.update('Welcome to Firestarter!!!', 'success')
-        return this.updateUserData(user) // if using firestore
-      })
-      .catch(error => this.handleError(error) );
-  }
   
   //// Email/Password Auth ////
   
@@ -94,6 +64,7 @@ export class AuthService {
   }
 
   emailLogin(email: string, password: string) {
+    console.log(email + ' ' + password)
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         this.notify.update('Welcome to Firestarter!!!', 'success')

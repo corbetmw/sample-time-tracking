@@ -15,6 +15,7 @@ import { TopNavComponent } from '../top-nav/top-nav.component';
 import { FooterNavComponent } from '../footer-nav/footer-nav.component';
 import { ReadmePageComponent } from '../readme-page/readme-page.component';
 import { NotificationMessageComponent } from '../notification-message/notification-message.component';
+import { MaterialModule } from '../../material/material.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   declarations: [
     UserLoginComponent,
