@@ -3,14 +3,15 @@ import { SampleService } from '../shared/sample.service';
 import { Sample } from '../shared/sample';
 import { Observable } from 'rxjs/Observable';
 import { ScanService } from '../../scans/shared/scan.service';
-import { MatSort, MatPaginator, MatSortable, MatTableDataSource } from '@angular/material';
+import { MatSort, MatPaginator, MatSortable, MatTableDataSource, MatDialog } from '@angular/material';
 import { Scan } from '../../scans/shared/scan';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { async } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { trigger,state,style,transition,animate,keyframes } from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { SampleScanService } from 'app/shared/sample-scan.service';
+import { ScanResponseDialogComponent } from 'app/kiosk/scan-response-dialog/scan-response-dialog.component';
 
 @Component({
   selector: 'samples-open-table',
@@ -20,6 +21,8 @@ import { SampleScanService } from 'app/shared/sample-scan.service';
 
 })
 export class SamplesOpenTableComponent implements OnInit {
+  success;
+  scanState;
   showSpinner: boolean = true;
   dataSource = new MatTableDataSource<Scan>();
   displayedColumns = [
@@ -30,14 +33,15 @@ export class SamplesOpenTableComponent implements OnInit {
     'equipment',
     'userName',
     'addInfo',
-    'inTime'
+    'inTime',
+    'punch'
   ];
 
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private sampleScanSvc: SampleScanService) { }
+  constructor(private sampleScanSvc: SampleScanService, public dialog: MatDialog) { }
 
   ngAfterViewInit() {
     this.sampleScanSvc.getOpenSamples().subscribe(openSamples => {
@@ -59,9 +63,55 @@ export class SamplesOpenTableComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  checkSampleFromList(event) {
-    this.sampleScanSvc.checkScan(event);
-    // console.log(event);
-    // console.log('scan checked');
+  checkSampleFromList(sampleId) {
+    if (event) {
+      this.sampleScanSvc.checkScan(sampleId)
+        .subscribe(sample => {
+
+          if (sample) {
+            //console.log('sample found')
+            this.success = true;
+            this.scanState = 'Sample ' + sampleId + ' was scanned successfully!'
+          } else {
+            //console.log('it failed')
+            this.success = false;
+            this.scanState = 'Sample ' + sampleId + ' is not a sample!'
+          }
+
+          this.openDialog()
+          setTimeout(() => {
+            this.closeDialog()
+          }, 1750);
+
+        },
+        (error) => {
+          console.log(error)
+        },
+        () => {
+
+        })
+    } else {
+      this.success = false;
+      this.scanState = 'You must provide a sample ID to punch!'
+      this.openDialog()
+      setTimeout(() => {
+        this.closeDialog()
+      }, 1750);
+    }
+
   }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(ScanResponseDialogComponent, {
+      width: '450px',
+      height: '400px',
+      data: { scanState: this.scanState, success: this.success }
+    });
+  }
+
+  closeDialog(): void {
+    let dialogRef = this.dialog.closeAll();
+  }
+
+
 }

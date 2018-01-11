@@ -37,6 +37,15 @@
 			<mat-header-cell *matHeaderCellDef mat-sort-header> In Time </mat-header-cell>
 			<mat-cell *matCellDef="let sample"> {{ sample.inTime | date: 'medium' }} </mat-cell>
 		</ng-container>
+		<ng-container matColumnDef="punch">
+			<mat-header-cell *matHeaderCellDef fxFlex="60px" > Punch </mat-header-cell>
+			<mat-cell *matCellDef="let sample" fxFlex="60px">
+				<button mat-raised-button color="accent" type="submit" (click)='checkSampleFromList(sample.sampleId)'>
+					<mat-icon>timer</mat-icon>
+					Punch
+				</button>
+			</mat-cell>
+		</ng-container>
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 	</mat-table>

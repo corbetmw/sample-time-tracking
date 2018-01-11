@@ -72,9 +72,9 @@ export class KioskComponent implements OnInit {
         '';
   }
 
-  checkSampleFromList(event) {
-    if(event){
-        this.sampleScanSvc.checkScan(event)
+  checkSampleFromList(sampleId) {
+    if(sampleId){
+        this.sampleScanSvc.checkScan(sampleId)
       .subscribe(sample => {
 
         if (sample) {
