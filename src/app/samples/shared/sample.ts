@@ -8,4 +8,5 @@ export class Sample {
   userName: string;
   addInfo: string;
   datePrinted: Date = new Date();
+  taskId: string;
 }

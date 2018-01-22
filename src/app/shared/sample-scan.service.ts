@@ -40,7 +40,7 @@ export class SampleScanService {
           lastestScan.subscribe(scans => {
             let currentScan = scans[0];
             if (currentScan === undefined) {
-              this.scanSvc.punchScanIn(sampleId);
+              this.scanSvc.punchScanIn(sampleId, sample.taskId);
               status = 'in'
             } else if (currentScan.outTime) {
               this.scanSvc.punchScanIn(sampleId);

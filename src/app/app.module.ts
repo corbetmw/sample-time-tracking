@@ -24,6 +24,7 @@ import { UiModule } from './ui/shared/ui.module';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
+import { HttpClientModule } from '@angular/common/http';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -45,6 +46,7 @@ export const firebaseConfig = environment.firebaseConfig;
     ScanModule,
     UiModule,
     KioskModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [

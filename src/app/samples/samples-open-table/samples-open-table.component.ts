@@ -72,6 +72,7 @@ export class SamplesOpenTableComponent implements OnInit {
             //console.log('sample found')
             this.success = true;
             this.scanState = 'Sample ' + sampleId + ' was scanned successfully!'
+            
           } else {
             //console.log('it failed')
             this.success = false;

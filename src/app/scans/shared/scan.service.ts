@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
 import * as firebase from 'firebase';
 import { SampleService } from 'app/samples/shared/sample.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable()
@@ -19,7 +20,7 @@ export class ScanService {
   scan: Observable<Scan>;   //   single object
 
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private http: HttpClient) {
     this.scansRef = db.list('/scans')
   }
 
@@ -64,13 +65,19 @@ export class ScanService {
   }
 
   // If scan is not clocked in, clock it in
-  punchScanIn(sampleId: string) {
+  punchScanIn(sampleId: string, taskId?: string) {
     try {
       let scan = {
-        sampleId:sampleId,
+        sampleId: sampleId,
         inTime: firebase.database.ServerValue.TIMESTAMP
       }
       this.createScan(scan);
+
+      //Execute Close BPM Task REST Call here
+      if(taskId){
+        this.closeBpmTask(taskId);
+      }
+
     } catch (error) {
       this.handleError(error);
     }
@@ -83,6 +90,7 @@ export class ScanService {
       this.updateScan(key, {
         outTime: firebase.database.ServerValue.TIMESTAMP
       });
+
     } catch (error) {
       this.handleError(error);
     }
@@ -102,6 +110,24 @@ export class ScanService {
     return scansList.snapshotChanges().map(arr => {
       return arr.map(snap => Object.assign(snap.payload.val(), { $key: snap.key }))
     })
+  }
+
+  closeBpmTask(taskId: string) {
+
+    const username = ''
+    const password = ''
+    const url = `http://shco-bpms-dev3:9080/rest/bpm/federated/htm/v1/task/` + taskId + `?action=complete&systemID=aaa8b298-8de6-4af6-b4a1-ba81f110caca`
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+      'Content-Type': 'application/json', 
+      "Authorization": "Basic " + btoa(username + ":" + password)})
+    };
+
+    return this.http.put(url, "", httpOptions).subscribe(data => {
+      console.log("BPM task successfully closed")
+    })
+
   }
 
   // Default error handling for all actions
